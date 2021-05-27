@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import dotenv from 'dotenv';
-import { injectHtml } from 'vite-plugin-html';
+import dotenv from 'dotenv'
+import { injectHtml } from 'vite-plugin-html'
 import { resolve } from 'path'
 
 export default ({ command, mode }) => {
@@ -10,10 +10,10 @@ export default ({ command, mode }) => {
   let outDir = 'dist'
   if (command === 'serve') {
     // 开发模式，默认使用.env配置
-    parsed = dotenv.config().parsed;
+    parsed = dotenv.config().parsed
   } else {
     // build模式，根据mode使用env文件
-    parsed = dotenv.config({ path: `.env.${mode}` }).parsed;
+    parsed = dotenv.config({ path: `.env.${mode}` }).parsed
     base = '/vite-vue3-template/'
     // outDir = 'dist/vite'
   }
@@ -23,7 +23,7 @@ export default ({ command, mode }) => {
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src')
-      },
+      }
     },
     build: {
       outDir
@@ -32,7 +32,7 @@ export default ({ command, mode }) => {
       proxy: {
         '/api': {
           target: 'http://www.toutiao.com/',
-          changeOrigin: true,
+          changeOrigin: true
           // secure: false,
           // rewrite: (path) => path.replace('/api/', '/')
         }
@@ -40,5 +40,3 @@ export default ({ command, mode }) => {
     }
   })
 }
-
-
