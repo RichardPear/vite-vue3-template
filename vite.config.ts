@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dotenv from 'dotenv';
 import { injectHtml } from 'vite-plugin-html';
+import { resolve } from "path";
+
 export default ({ command, mode }) => {
   let parsed = {}
   let base = '/'
@@ -18,6 +20,9 @@ export default ({ command, mode }) => {
   return defineConfig({
     base,
     plugins: [vue(), injectHtml({ injectData: parsed })],
+    alias: {
+      '@': resolve(__dirname, 'src')
+    },
     build: {
       outDir
     },
@@ -25,7 +30,9 @@ export default ({ command, mode }) => {
       proxy: {
         '/api': {
           target: 'http://www.toutiao.com/',
-          changeOrigin: true
+          changeOrigin: true,
+          // secure: false,
+          // rewrite: (path) => path.replace('/api/', '/')
         }
       }
     }
