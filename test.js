@@ -7,3 +7,5 @@ if (result.error) {
 }
 
 console.log(result, result.parsed)
+const x = 1
+console.log(x)
