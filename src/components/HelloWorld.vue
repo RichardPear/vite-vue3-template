@@ -27,7 +27,8 @@
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
   </p>
 
-  <button @click="count++">count is: {{ count }}</button>
+  <button @click="addCount">count is: {{ count }}</button>
+  <button @click="doubleCount">double count is: {{ count }}</button>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
@@ -38,7 +39,8 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { ref, defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
 export default defineComponent({
   name: 'HelloWorld',
   props: {
@@ -48,9 +50,14 @@ export default defineComponent({
     }
   },
   setup: () => {
-    const count = ref(0)
     const appTitle = ref(import.meta.env.BASE_URL)
-    return { count, appTitle }
+    const store = useStore()
+    return {
+      appTitle,
+      count: computed(() => store.state.count),
+      addCount: () => store.dispatch('increment'),
+      doubleCount: () => store.commit('doubleCount')
+    }
   }
 })
 </script>
