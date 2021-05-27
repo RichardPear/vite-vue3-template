@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dotenv from 'dotenv';
 import { injectHtml } from 'vite-plugin-html';
-import { resolve } from "path";
+import { resolve } from 'path'
 
 export default ({ command, mode }) => {
   let parsed = {}
@@ -20,8 +20,10 @@ export default ({ command, mode }) => {
   return defineConfig({
     base,
     plugins: [vue(), injectHtml({ injectData: parsed })],
-    alias: {
-      '@': resolve(__dirname, 'src')
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src')
+      },
     },
     build: {
       outDir
@@ -38,3 +40,5 @@ export default ({ command, mode }) => {
     }
   })
 }
+
+
