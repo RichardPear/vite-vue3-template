@@ -12,7 +12,7 @@ export default ({ command, mode }) => {
   } else {
     // build模式，根据mode使用env文件
     parsed = dotenv.config({ path: `.env.${mode}` }).parsed;
-    // base = '/vite/'
+    base = '/vite-vue3-template/'
     // outDir = 'dist/vite'
   }
   return defineConfig({
