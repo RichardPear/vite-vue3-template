@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+
+# eslint --fix ./src --ext .vue,.js,.ts # 会对整个项目进行
+npx lint-staged # 只对已缓存的文件进行eslint校验
